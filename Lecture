@@ -1,0 +1,47 @@
+10월 10일 강의 내용
+1. MVC model 1 과  MVC model 2 를 간단하게 구분하시오.
+(hint) Controller를 구현하는 방법의 차이
+ Controller의 역할을 JSP로 구현한 패턴을 MVC 1, 서블릿으로 구현한 패턴을 MVC 2라고 한다.
+2. MVC 모델을 3 - tier로  구분해봅니다
+(1)  memberInput.jsp       memberOutput.jsp     ------- view        -----
+                                                                        |  Presentation tier 
+(2)                memberProc.jsp               ------- controller  -----
+
+
+(3)                MemberService.java           ---------      ---------- Business tier 
+                                                         |
+(4)                MemberDAO.java                      model   ----------
+                                                         |              | Persistent tier
+(5)                DB(member table)             ----------     ----------
+
+3. 컨트롤러의 기능
+(1) 뷰애서 들어온 요청을 받는다. (예) InsertController DeleteController
+(2) 클라이언트가 전달한 파라미터를 추출(한글 인코딩 포함)
+(3) 파라미터의 유효성 검사, 유효성 검사를 실패하면 뷰로 돌려보낸다.
+(4) 서비스객체의 메서드를 호출하여 파라미터를 서비스 객체로 전달한다.
+(5) 출력 뷰 페이지로 이동한다.
+
+4. 프론트 컨트롤러를 이용한 웹 애플리케이션의 뷰와 컨트롤러의 일괄 처리 구현
+[url-pattern]
+- 디렉터리 패턴 : 
+                                        url 맵핑 값
+http://localhost:8090/jsp04/abc -------> /abc 서블릿
+http://localhost:8090/jsp04/ddd -------> /ddd 서블릿
+
+- 확장자 패턴 : 
+http://localhost:8090/jsp04/abc.do ------->-----------+
+										  | *.do 서블릿  |
+http://localhost:8090/jsp04/ddd.do ------->-----------+
+
+[FrontController pattern]
+클라이언트 요청 1 ---------->
+클라이언트 요청 2 ---------->  ????        -------->   DAO 에서 
+클라이언트 요청 3 ---------->                          데이터베이스 작업 수행
+클라이언트 요청 4 ---------->
+
+[Command Pattern]
+                                              [              ]
+클라이언트 요청 1 ---------->                         요청1 클래스
+클라이언트 요청 2 ---------->   모든 요청을 직접    --------> 요청2 클래스    ----> DAO 에서
+클라이언트 요청 3 ---------->   처리하지 않는 서블릿                    요청3 클래스                  데이터베이스 작업 수행
+클라이언트 요청 4 ---------->                         요청4 클래스   

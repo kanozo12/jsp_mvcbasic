@@ -1,6 +1,6 @@
-package com.edu.beans;
+package com.edu.vo;
 
-public class Member {
+public class MemberVO {
 	private String id;
 	private String passwd;
 	private String name;
@@ -36,6 +36,12 @@ public class Member {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+
+	// 회원정보를 출력하기 위한 toString 메서드 오버라이드
+	@Override
+	public String toString() {
+		return "MemberVO [id=" + id + ", passwd=" + passwd + ", name=" + name + ", mail=" + mail + "]";
 	}
 
 }
